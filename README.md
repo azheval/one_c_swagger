@@ -1,4 +1,4 @@
-# one_c_logs_swagger
+# one_c_swagger
 
 ![build](https://github.com/azheval/one_c_swagger/actions/workflows/release.yml/badge.svg)
 
