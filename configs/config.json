@@ -1,0 +1,13 @@
+{
+    "log": {
+        "log_path": "logs",
+        "log_level": "INFO"
+    },
+    "project": {
+        "configuration_path": "docs/example/cf",
+        "extensions_path": "docs/example/cfe",
+        "out_path": "example/out",
+        "swagger_config_path": "docs/example/swagger-configs",
+        "all_services_config_filename": "all_services.json"
+    }
+}

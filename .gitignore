@@ -1,0 +1,5 @@
+/example
+/logs
+.chglog
+git-chglog.exe
+Makefile

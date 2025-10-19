@@ -1,0 +1,115 @@
+{
+    "servers": [
+        {
+            "url": "http://localhost/demo_base/hs",
+            "description": "Основной сервер"
+        }
+    ],
+    "components": {
+        "headers": {
+            "Access-Control-Allow-Origin": {
+                "description": "Указывает, каким источникам разрешен доступ к ресурсу.",
+                "schema": {
+                    "type": "string"
+                }
+            },
+            "Access-Control-Allow-Methods": {
+                "description": "Указывает разрешенные методы при доступе к ресурсу.",
+                "schema": {
+                    "type": "string"
+                }
+            },
+            "Access-Control-Allow-Headers": {
+                "description": "Указывает разрешенные заголовки при доступе к ресурсу.",
+                "schema": {
+                    "type": "string"
+                }
+            }
+        },
+        "securitySchemes": {
+            "basicAuth": {
+                "type": "http",
+                "scheme": "basic"
+            }
+        },
+        "parameters": {
+            "ContentTypeHeader": {
+                "name": "Content-Type",
+                "in": "header",
+                "required": true,
+                "schema": {
+                    "type": "string",
+                    "default": "application/json; charset=utf-8"
+                }
+            }
+        },
+        "schemas": {
+            "Error": {
+                "type": "object",
+                "description": "Контейнер с информацией об ошибке",
+                "properties": {
+                    "code": {
+                        "type": "integer",
+                        "description": "Код ошибки приложения"
+                    },
+                    "message": {
+                        "type": "string",
+                        "description": "Краткое описание ошибки"
+                    }
+                }
+            },
+            "GenericError": {
+                "type": "object",
+                "properties": {
+                    "error": {
+                        "$ref": "#/components/schemas/Error"
+                    }
+                }
+            }
+        },
+        "responses": {
+            "DefaultErrorResponse": {
+                "description": "Стандартный ответ при ошибке",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/GenericError"
+                        },
+                        "example": {
+                            "error": {
+                                "code": 1024,
+                                "message": "Не удалось выполнить операцию"
+                            }
+                        }
+                    }
+                }
+            },
+            "500": {
+                "description": "Стандартный ответ при ошибке",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/GenericError"
+                        },
+                        "example": {
+                            "error": {
+                                "code": 1024,
+                                "message": "Не удалось выполнить операцию"
+                            }
+                        }
+                    }
+                }
+            },
+            "NotFound": {
+                "description": "Объект не найден.",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/GenericError"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

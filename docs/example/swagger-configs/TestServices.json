@@ -1,0 +1,83 @@
+{
+    "servers": [
+        {
+            "url": "http://localhost:8097/api",
+            "description": "Локальный сервер для разработки"
+        }
+    ],
+    "components": {
+        "securitySchemes": {
+            "basicAuthTestServices": {
+                "type": "http",
+                "scheme": "basic"
+            }
+        },
+        "schemas": {
+            "SuccessResponse": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Массив с данными"
+                    }
+                }
+            },
+            "ErrorResponse": {
+                "type": "object",
+                "properties": {
+                    "error": {
+                        "type": "string",
+                        "description": "Текст сообщения об ошибке"
+                    }
+                }
+            }
+        }
+    },
+    "security": [
+        {
+            "basicAuthTestServices": []
+        }
+    ],
+    "paths": {
+        "/data": {
+            "get": {
+                "summary": "Получить тестовые данные",
+                "operationId": "getTestData",
+                "responses": {
+                    "200": {
+                        "description": "Успешный ответ с данными",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SuccessResponse"
+                                },
+                                "example": {
+                                    "data": [
+                                        "item1",
+                                        "item2"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Ошибка выполнения запроса",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFound"
+                    }
+                }
+            }
+        }
+    }
+}

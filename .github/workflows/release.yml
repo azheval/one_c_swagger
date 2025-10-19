@@ -1,0 +1,86 @@
+name: Build and Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: [windows, linux]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: 1.24
+
+      - name: Build binary
+        run: |
+          GOOS=${{ matrix.os }}
+          GOARCH=amd64
+          go build -ldflags="-X 'main.version=${{ github.ref_name }}'" -o one_c_swagger-${GOOS}-${GOARCH} main.go
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.os }}-binary
+          path: one_c_swagger-${{ matrix.os }}-amd64*
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: binaries/
+
+      - name: Verify downloaded files
+        run: ls -la binaries/
+
+      - name: Copy binaries
+        run: |
+          mkdir -p release
+          mv binaries/windows-binary/* release/
+          mv binaries/linux-binary/* release/
+
+      - name: Create GitHub Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref_name }}
+          release_name: Release ${{ github.ref_name }}
+          draft: false
+          prerelease: false
+
+      - name: Upload linux binaries
+        uses: actions/upload-release-asset@v1
+        env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+            upload_url: ${{ steps.create_release.outputs.upload_url }}
+            asset_path: release/one_c_swagger-linux-amd64
+            asset_name: one_c_swagger-linux-amd64
+            asset_content_type: application/octet-stream
+
+      - name: Upload windows binaries
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: release/one_c_swagger-windows-amd64
+          asset_name: one_c_swagger-windows-amd64.exe
+          asset_content_type: application/octet-stream

@@ -1,0 +1,531 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "1C HTTP Services",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost/demo_base/hs",
+      "description": "Основной сервер"
+    }
+  ],
+  "tags": [
+    {
+      "name": "GetProductPrice"
+    },
+    {
+      "name": "Биллинг"
+    },
+    {
+      "name": "ПередачаДанных"
+    },
+    {
+      "name": "TestServices"
+    }
+  ],
+  "paths": {
+    "/billing/bill/{Версия}/*": {
+      "post": {
+        "tags": [
+          "Биллинг"
+        ],
+        "summary": "Добавить",
+        "operationId": "БиллингДобавить",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Биллинг_BillingInfo"
+              }
+            }
+          }
+        },
+        "responses": {
+          "500": {
+            "$ref": "#/components/responses/500"
+          },
+          "DefaultErrorResponse": {
+            "$ref": "#/components/responses/DefaultErrorResponse"
+          },
+          "NotFound": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        },
+        "security": [
+          {
+            "basicAuth": []
+          }
+        ]
+      }
+    },
+    "/billing/setup": {
+      "post": {
+        "tags": [
+          "Биллинг"
+        ],
+        "summary": "Добавить",
+        "operationId": "БиллингДобавить",
+        "responses": {
+          "500": {
+            "$ref": "#/components/responses/500"
+          },
+          "DefaultErrorResponse": {
+            "$ref": "#/components/responses/DefaultErrorResponse"
+          },
+          "NotFound": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        },
+        "security": [
+          {
+            "basicAuth": []
+          }
+        ]
+      }
+    },
+    "/billing/setup_result/{ИдентификаторЗадания}": {
+      "get": {
+        "tags": [
+          "Биллинг"
+        ],
+        "summary": "Получить",
+        "operationId": "БиллингПолучить",
+        "responses": {
+          "500": {
+            "$ref": "#/components/responses/500"
+          },
+          "DefaultErrorResponse": {
+            "$ref": "#/components/responses/DefaultErrorResponse"
+          },
+          "NotFound": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        },
+        "security": [
+          {
+            "basicAuth": []
+          }
+        ]
+      }
+    },
+    "/billing/uninstall": {
+      "post": {
+        "tags": [
+          "Биллинг"
+        ],
+        "summary": "Добавить",
+        "operationId": "БиллингДобавить",
+        "responses": {
+          "500": {
+            "$ref": "#/components/responses/500"
+          },
+          "DefaultErrorResponse": {
+            "$ref": "#/components/responses/DefaultErrorResponse"
+          },
+          "NotFound": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        },
+        "security": [
+          {
+            "basicAuth": []
+          }
+        ]
+      }
+    },
+    "/billing/version": {
+      "get": {
+        "tags": [
+          "Биллинг"
+        ],
+        "summary": "Получить",
+        "operationId": "БиллингПолучить",
+        "responses": {
+          "500": {
+            "$ref": "#/components/responses/500"
+          },
+          "DefaultErrorResponse": {
+            "$ref": "#/components/responses/DefaultErrorResponse"
+          },
+          "NotFound": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        },
+        "security": [
+          {
+            "basicAuth": []
+          }
+        ]
+      }
+    },
+    "/dt/download/{ID}": {
+      "get": {
+        "tags": [
+          "ПередачаДанных"
+        ],
+        "summary": "GET",
+        "operationId": "ПередачаДанныхGET",
+        "responses": {
+          "500": {
+            "$ref": "#/components/responses/500"
+          },
+          "DefaultErrorResponse": {
+            "$ref": "#/components/responses/DefaultErrorResponse"
+          },
+          "NotFound": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        },
+        "security": [
+          {
+            "basicAuth": []
+          }
+        ]
+      }
+    },
+    "/dt/storage/{Storage}/{ID}": {
+      "get": {
+        "tags": [
+          "ПередачаДанных"
+        ],
+        "summary": "GET",
+        "operationId": "ПередачаДанныхGET",
+        "responses": {
+          "500": {
+            "$ref": "#/components/responses/500"
+          },
+          "DefaultErrorResponse": {
+            "$ref": "#/components/responses/DefaultErrorResponse"
+          },
+          "NotFound": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        },
+        "security": [
+          {
+            "basicAuth": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "ПередачаДанных"
+        ],
+        "summary": "POST",
+        "operationId": "ПередачаДанныхPOST",
+        "responses": {
+          "500": {
+            "$ref": "#/components/responses/500"
+          },
+          "DefaultErrorResponse": {
+            "$ref": "#/components/responses/DefaultErrorResponse"
+          },
+          "NotFound": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        },
+        "security": [
+          {
+            "basicAuth": []
+          }
+        ]
+      }
+    },
+    "/dt/upload/{ID}": {},
+    "/dt/volume/{VolumeID}/*": {
+      "get": {
+        "tags": [
+          "ПередачаДанных"
+        ],
+        "summary": "GET",
+        "operationId": "ПередачаДанныхGET",
+        "responses": {
+          "500": {
+            "$ref": "#/components/responses/500"
+          },
+          "DefaultErrorResponse": {
+            "$ref": "#/components/responses/DefaultErrorResponse"
+          },
+          "NotFound": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        },
+        "security": [
+          {
+            "basicAuth": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "ПередачаДанных"
+        ],
+        "summary": "POST",
+        "operationId": "ПередачаДанныхPOST",
+        "responses": {
+          "500": {
+            "$ref": "#/components/responses/500"
+          },
+          "DefaultErrorResponse": {
+            "$ref": "#/components/responses/DefaultErrorResponse"
+          },
+          "NotFound": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        },
+        "security": [
+          {
+            "basicAuth": []
+          }
+        ]
+      }
+    },
+    "/testServices/data": {
+      "get": {
+        "tags": [
+          "TestServices"
+        ],
+        "summary": "Получить тестовые данные",
+        "operationId": "getTestData",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "data": [
+                    "item1",
+                    "item2"
+                  ]
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/TestServices_SuccessResponse"
+                }
+              }
+            },
+            "description": "Успешный ответ с данными"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          },
+          "DefaultErrorResponse": {
+            "$ref": "#/components/responses/DefaultErrorResponse"
+          },
+          "NotFound": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TestServices_ErrorResponse"
+                }
+              }
+            },
+            "description": "Ошибка выполнения запроса"
+          }
+        },
+        "security": [
+          {
+            "basicAuthTestServices": []
+          }
+        ]
+      }
+    },
+    "/v1/Ping/*": {
+      "get": {
+        "tags": [
+          "GetProductPrice"
+        ],
+        "summary": "Get",
+        "operationId": "GetProductPriceGet",
+        "responses": {
+          "500": {
+            "$ref": "#/components/responses/500"
+          },
+          "DefaultErrorResponse": {
+            "$ref": "#/components/responses/DefaultErrorResponse"
+          },
+          "NotFound": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        },
+        "security": [
+          {
+            "basicAuth": []
+          }
+        ]
+      }
+    },
+    "/v1/Price/*": {
+      "get": {
+        "tags": [
+          "GetProductPrice"
+        ],
+        "summary": "Get",
+        "operationId": "GetProductPriceGet",
+        "responses": {
+          "500": {
+            "$ref": "#/components/responses/500"
+          },
+          "DefaultErrorResponse": {
+            "$ref": "#/components/responses/DefaultErrorResponse"
+          },
+          "NotFound": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        },
+        "security": [
+          {
+            "basicAuth": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Error": {
+        "description": "Контейнер с информацией об ошибке",
+        "properties": {
+          "code": {
+            "description": "Код ошибки приложения",
+            "type": "integer"
+          },
+          "message": {
+            "description": "Краткое описание ошибки",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "GenericError": {
+        "properties": {
+          "error": {
+            "$ref": "#/components/schemas/Error"
+          }
+        },
+        "type": "object"
+      },
+      "TestServices_ErrorResponse": {
+        "properties": {
+          "error": {
+            "description": "Текст сообщения об ошибке",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "TestServices_SuccessResponse": {
+        "properties": {
+          "data": {
+            "description": "Массив с данными",
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "Биллинг_BillingInfo": {
+        "properties": {
+          "account": {
+            "type": "string"
+          },
+          "amount": {
+            "type": "number"
+          }
+        },
+        "type": "object"
+      }
+    },
+    "securitySchemes": {
+      "basicAuth": {
+        "type": "http",
+        "scheme": "basic"
+      },
+      "basicAuthTestServices": {
+        "type": "http",
+        "scheme": "basic"
+      }
+    },
+    "parameters": {
+      "ContentTypeHeader": {
+        "name": "Content-Type",
+        "in": "header",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      }
+    },
+    "headers": {
+      "Access-Control-Allow-Headers": {
+        "description": "Указывает разрешенные заголовки при доступе к ресурсу.",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "Access-Control-Allow-Methods": {
+        "description": "Указывает разрешенные методы при доступе к ресурсу.",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "Access-Control-Allow-Origin": {
+        "description": "Указывает, каким источникам разрешен доступ к ресурсу.",
+        "schema": {
+          "type": "string"
+        }
+      }
+    },
+    "responses": {
+      "500": {
+        "content": {
+          "application/json": {
+            "example": {
+              "error": {
+                "code": 1024,
+                "message": "Не удалось выполнить операцию"
+              }
+            },
+            "schema": {
+              "$ref": "#/components/schemas/GenericError"
+            }
+          }
+        },
+        "description": "Стандартный ответ при ошибке"
+      },
+      "DefaultErrorResponse": {
+        "content": {
+          "application/json": {
+            "example": {
+              "error": {
+                "code": 1024,
+                "message": "Не удалось выполнить операцию"
+              }
+            },
+            "schema": {
+              "$ref": "#/components/schemas/GenericError"
+            }
+          }
+        },
+        "description": "Стандартный ответ при ошибке"
+      },
+      "NotFound": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/GenericError"
+            }
+          }
+        },
+        "description": "Объект не найден."
+      }
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "components": {
+    "schemas": {
+      "BillingInfo": {
+        "type": "object",
+        "properties": {
+          "account": {
+            "type": "string"
+          },
+          "amount": {
+            "type": "number"
+          }
+        }
+      }
+    }
+  },
+  "paths": {
+    "/bill/{Версия}/*": {
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BillingInfo"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
