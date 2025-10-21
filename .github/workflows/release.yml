@@ -11,10 +11,10 @@ permissions:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
     strategy:
       matrix:
         os: [windows, linux]
+    runs-on: ${{ matrix.os == 'windows' && 'windows-latest' || 'ubuntu-latest' }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -22,13 +22,25 @@ jobs:
       - name: Set up Go
         uses: actions/setup-go@v4
         with:
-          go-version: 1.24
+          go-version: 1.22
 
-      - name: Build binary
+      - name: Build binary (Windows)
+        if: matrix.os == 'windows'
         run: |
-          GOOS=${{ matrix.os }}
-          GOARCH=amd64
-          go build -ldflags="-X 'main.version=${{ github.ref_name }}'" -o one_c_swagger-${GOOS}-${GOARCH} cmd/one_c_swagger/main.go
+          $env:GOOS="windows"
+          $env:GOARCH="amd64"
+          $outputName="one_c_swagger-windows-amd64.exe"
+          go build -ldflags="-X 'main.version=${{ github.ref_name }}'" -o $outputName cmd/one_c_swagger/main.go
+        shell: pwsh
+
+      - name: Build binary (Linux)
+        if: matrix.os == 'linux'
+        run: |
+          GOOS="linux"
+          GOARCH="amd64"
+          outputName="one_c_swagger-linux-amd64"
+          go build -ldflags="-X 'main.version=${{ github.ref_name }}'" -o $outputName cmd/one_c_swagger/main.go
+        shell: bash
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
@@ -81,6 +93,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: release/one_c_swagger-windows-amd64
+          asset_path: release/one_c_swagger-windows-amd64.exe
           asset_name: one_c_swagger-windows-amd64.exe
           asset_content_type: application/octet-stream
