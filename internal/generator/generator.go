@@ -126,6 +126,36 @@ func GenerateOpenAPI(services []reader.HTTPService, configs map[string]*reader.S
 							overlayOp = pathItemConfig.Get
 						case "POST":
 							overlayOp = pathItemConfig.Post
+						case "PUT":
+							overlayOp = pathItemConfig.Put
+						case "DELETE":
+							overlayOp = pathItemConfig.Delete
+						case "HEAD":
+							overlayOp = pathItemConfig.Head
+						case "PATCH":
+							overlayOp = pathItemConfig.Patch
+						case "MERGE":
+							overlayOp = pathItemConfig.Merge
+						case "OPTIONS":
+							overlayOp = pathItemConfig.Options
+						case "TRACE":
+							overlayOp = pathItemConfig.Trace
+						case "CONNECT":
+							overlayOp = pathItemConfig.Connect
+						case "PROPFIND":
+							overlayOp = pathItemConfig.Propfind
+						case "PROPPATCH":
+							overlayOp = pathItemConfig.Proppatch
+						case "MOVE":
+							overlayOp = pathItemConfig.Move
+						case "COPY":
+							overlayOp = pathItemConfig.Copy
+						case "LOCK":
+							overlayOp = pathItemConfig.Lock
+						case "UNLOCK":
+							overlayOp = pathItemConfig.Unlock
+						case "MKCOL":
+							overlayOp = pathItemConfig.Mkcol
 						}
 					}
 				}
@@ -183,6 +213,36 @@ func GenerateOpenAPI(services []reader.HTTPService, configs map[string]*reader.S
 					pathItem.Get = finalOp
 				case "POST":
 					pathItem.Post = finalOp
+				case "PUT":
+					pathItem.Put = finalOp
+				case "DELETE":
+					pathItem.Delete = finalOp
+				case "HEAD":
+					pathItem.Head = finalOp
+				case "PATCH":
+					pathItem.Patch = finalOp
+				case "MERGE":
+					pathItem.Merge = finalOp
+				case "OPTIONS":
+					pathItem.Options = finalOp
+				case "TRACE":
+					pathItem.Trace = finalOp
+				case "CONNECT":
+					pathItem.Connect = finalOp
+				case "PROPFIND":
+					pathItem.Propfind = finalOp
+				case "PROPPATCH":
+					pathItem.Proppatch = finalOp
+				case "MOVE":
+					pathItem.Move = finalOp
+				case "COPY":
+					pathItem.Copy = finalOp
+				case "LOCK":
+					pathItem.Lock = finalOp
+				case "UNLOCK":
+					pathItem.Unlock = finalOp
+				case "MKCOL":
+					pathItem.Mkcol = finalOp
 				}
 			}
 			openapi.Paths[path] = pathItem
